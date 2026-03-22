@@ -113,7 +113,7 @@
       font-size: 15px;
       color: var(--text-muted);
       margin-bottom: 24px;
-      max-width: 720px;
+      max-width: 100%;
     }
 
     /* ABOUT */
@@ -127,26 +127,25 @@
     }
 
     .about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
-      gap: 32px;
-      align-items: start;
-    }
-
-    @media (max-width: 768px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
+      display: flow-root; /* 清除浮动，防止父容器高度塌陷 */
     }
 
     .about-photo-wrap {
-      display: flex;
-      justify-content: center;
+      float: left; /* 让图片靠左浮动，文字自然环绕 */
+      margin: 0 32px 16px 0; /* 设置右侧和下方的间距 */
+      width: 320px; /* 固定图片容器宽度 */
+    }
+
+    @media (max-width: 768px) {
+      .about-photo-wrap {
+        float: none; /* 手机端屏幕窄，取消浮动环绕 */
+        margin: 0 auto 24px auto; /* 图片重新居中 */
+        width: 100%;
+      }
     }
 
     .about-photo {
       width: 100%;
-      max-width: 320px;
       height: auto;
       border-radius: 6px;
       overflow: hidden;
